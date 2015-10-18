@@ -1,4 +1,6 @@
 ---
+- name: variable output
+  debug: msg="System {{ username }}"
 - name: jail_sftp | Create sftp user group
   group: name=sftponly
          state=present
