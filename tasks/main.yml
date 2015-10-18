@@ -36,7 +36,7 @@
         state=present
 
 # A working chrooted SFTP setup requires root:sftgroup ownership of a user's home directory.
-- name: SFTP-Server | Correct ownership and permission of home directories
+- name: jail_sftp | Correct ownership and permission of home directories
   file: path="{{ homedir }}/{{ username }}"
         owner=root
         group=sftponly
@@ -51,7 +51,7 @@
 - name: jail_sftp | Get Site Name
   shell: echo "{{ mountroot }}" | grep -Eo '[^/]+/?$'
   register: sitename
-  
+
 - name: jail_sftp | Create Mount Folder
   file: path="{{ homedir }}/{{ username }}/{{ sitename }}"
         owner={{ username }}
