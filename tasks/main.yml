@@ -48,7 +48,6 @@
 - name: jail_sftp | Update user passwords
   user: name={{ username }}
         password={{ pass }}
-  when: pass != ''
 
 - name: jail_sftp | Get Site Name
   shell: echo "{{ mountroot }}" | grep -Eo '[^/]+/?$'
