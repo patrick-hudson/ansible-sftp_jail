@@ -65,7 +65,7 @@
         opts=rw,bind
         state=mounted
 - name: jail_sftp | Print users password
-  debug: msg="{{ "Finished! Your new SFTP Jailed account has been created. Username: " + username + " Password: " + pass}}"
+  debug: msg="Finished! Your new SFTP Jailed account has been created. Username: {{ username }} Password:  {{ pass}}"
 
 
 
