@@ -21,7 +21,8 @@ How to use
 
 After it runs, your output should look something like this
 
-```~/jail_sftp_ansible# ansible-playbook --extra-vars "username=patrick mountroot=/var/www/vhosts/whotheip.com" -i hosts site.yml
+```
+~/jail_sftp_ansible# ansible-playbook --extra-vars "username=patrick mountroot=/var/www/vhosts/whotheip.com" -i hosts site.yml
 
 PLAY [test-playbook | Test sftp-server role] **********************************
 
