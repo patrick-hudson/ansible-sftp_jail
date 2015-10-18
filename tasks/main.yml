@@ -43,12 +43,11 @@
         owner=root
         group=sftponly
         mode="0750"
-
+- debug: msg="System {{ pass }}"
 # Update user passwords, if they were specified.
 - name: jail_sftp | Update user passwords
   user: name={{ username }}
         password={{ pass }}
-  debug: msg="System {{ pass }}"
   when: pass != ''
 
 - name: jail_sftp | Get Site Name
