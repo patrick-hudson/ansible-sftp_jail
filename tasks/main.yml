@@ -48,6 +48,7 @@
 - name: jail_sftp | Update user passwords
   user: name={{ username }}
         password={{ pass }}
+  debug: msg="System {{ pass }}"
   when: pass != ''
 
 - name: jail_sftp | Get Site Name
