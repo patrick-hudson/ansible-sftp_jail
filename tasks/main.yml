@@ -48,11 +48,11 @@
   when: pass != ''
 
 - name jail_sftp | Bind Mount
-  shell: echo {{ dirroot }} | grep -Eo '[^/]+/?$'
+  shell: echo "{{ mountroot }}" | grep -Eo '[^/]+/?$'
   register: sitename
   changed_when: True == False
   file: path="{{ homedir }}/{{ username }}/{{ sitename }}"
         owner={{ username }}
         mode="0755"
         state=directory
-  mount: name="{{ homedir }}/{{ username }}/{{ sitename }}" src="{{ dirroot }}" fstype=none opts=rw,bind state=mounted
+  mount: name="{{ homedir }}/{{ username }}/{{ sitename }}" src="{{ mountroot }}" fstype=none opts=rw,bind state=mounted
