@@ -25,7 +25,8 @@
   template: src=sshd_config.j2
             dest=/etc/ssh/sshd_config
             owner=root
-  notify: SFTP-Server | Restart sshd
+  when: match_block_test.stdout.find("Not Found") != -1
+  notify: jail_sftp | Restart sshd
 
 # Create each SFTP user with home directory on the correct patition, and add to SFTP group.
 - name: SFTP-Server | Create sftp users
@@ -47,11 +48,15 @@
         password={{ pass }}
   when: pass != ''
 
-- name: jail_sftp | Bind Mount
+- name: jail_sftp | Get Site Name
   shell: echo "{{ mountroot }}" | grep -Eo '[^/]+/?$'
   register: sitename
+  
+- name: jail_sftp | Create Mount Folder
   file: path="{{ homedir }}/{{ username }}/{{ sitename }}"
         owner={{ username }}
         mode="0755"
         state=directory
+
+- name: jail_sftp | Bind Mount
   mount: name="{{ homedir }}/{{ username }}/{{ sitename }}" src="{{ mountroot }}" fstype=none opts=rw,bind state=mounted
