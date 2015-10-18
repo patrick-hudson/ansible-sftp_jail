@@ -53,8 +53,7 @@
 - name: jail_sftp | Get Site Name
   shell: echo "{{ mountroot }}" | grep -Eo '[^/]+/?$'
   register: sitename
-  debug: msg="System {{ sitename }}"
-
+- debug: msg="System {{ sitename }}"
 - name: jail_sftp | Create Mount Folder
   file: path="{{ homedir }}/{{ username }}/{{ sitename }}"
         owner={{ username }}
