@@ -32,7 +32,8 @@
   register: pass
 
 - name: jail_sftp | Save temp password
-  content="{{ pass.stdout }}" dest=/tmp/tempuserpass
+  copy: content="{{ pass.stdout }}" dest=/tmp/tempuserpass
+
 - name: jail_sftp | copy finished script
   template: src=finished.j2
             dest=/home/rack/finished.sh
