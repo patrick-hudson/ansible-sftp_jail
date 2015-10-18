@@ -1,10 +1,11 @@
 #!/bin/bash
 checkIfAnsible(){
-    if pgrep "ansible" >/dev/null 2>&1
+    if pgrep "ansible" > /dev/null
       then
-         checkIfAnsible()
+         checkIfAnsible
       else
          pass=$(cat /tmp/tempuserpass)
          echo $pass
     fi
 }
+checkIfAnsible
