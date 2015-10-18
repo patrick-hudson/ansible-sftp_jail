@@ -65,9 +65,9 @@
         state=mounted
 
 - name: jail_sftp | Restart SSH - Debian
-    notify: jail_sftp | Restart sshd-debian
-    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+  notify: jail_sftp | Restart sshd-debian
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: jail_sftp | Restart SSH - CentOS
-    notify: jail_sftp | Restart sshd-centos
-    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
+  notify: jail_sftp | Restart sshd-centos
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
