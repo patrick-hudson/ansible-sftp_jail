@@ -25,6 +25,7 @@
             owner=root
   when: match_block_test.stdout.find("Not Found") != -1
   notify: jail_sftp | Restart sshd
+  ignore_errors: yes
 
 - name: jail_sftp | Generate password
   shell: python -c "import string; import random; chars = string.letters + string.digits + string.punctuation; pwdSize = 16; print ''.join((random.choice(chars)) for x in range(pwdSize))"
