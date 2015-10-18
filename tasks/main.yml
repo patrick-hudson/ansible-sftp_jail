@@ -33,7 +33,7 @@
   shell: mkpasswd --method=SHA-512 {{ pass }}
   register: hashpass
 
-- name: SFTP-Server | Create sftp users
+- name: jail_sftp | Create sftp users
   user: name={{ username }}
         password={{ hashpass.stdout }}
         groups=sftponly
@@ -44,7 +44,7 @@
   file: path="{{ homedir }}/{{ username }}"
         owner=root
         group=sftponly
-        mode="0750"
+        mode="0755"
 - debug: msg="System {{ pass }}"
 
 - name: jail_sftp | Get Site Name
@@ -60,8 +60,8 @@
 
 - name: jail_sftp | Bind Mount
   mount: 
-    name="{{ homedir }}/{{ username }}/{{ sitename.stdout }}" 
-    src="{{ mountroot }}" 
-    fstype=none 
-    opts=rw,bind 
-    state=mounted
+        name="{{ homedir }}/{{ username }}/{{ sitename.stdout }}" 
+        src="{{ mountroot }}" 
+        fstype=none 
+        opts=rw,bind 
+        state=mounted
