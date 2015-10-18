@@ -1,7 +1,6 @@
 ---
-- name: jail_sftp | Restart sshd-debian
+- name: jail_sftp | Restart sshd
   service: name=ssh
            state=restarted
-- name: jail_sftp | Restart sshd-centos
   service: name=sshd
            state=restarted
