@@ -65,7 +65,7 @@
         opts=rw,bind
         state=mounted
 - name: jail_sftp | Print users password
-  debug: var=hashpass.stdout
+  debug: msg={{ "Finished! Your new SFTP Jailed account has been created. Username: " + username + " Password: " + pass}}
 
 
 
