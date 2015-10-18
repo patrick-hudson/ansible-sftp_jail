@@ -10,7 +10,6 @@
               regexp="^Subsystem sftp"
               line="Subsystem sftp internal-sftp"
               state=present
-  notify: jail_sftp | Restart sshd
 
 - name: jail_sftp | Test for Match Block
   shell: if [[ $(sed -n '/Match Group sftponly/,/ForceCommand internal-sftp/ { p }' /etc/ssh/sshd_config) ]]; then echo 'Match User Block Found'; else echo 'Not Found'; fi
@@ -27,7 +26,6 @@
             dest=/etc/ssh/sshd_config
             owner=root
   when: match_block_test.stdout.find("Not Found") != -1
-  notify: jail_sftp | Restart sshd
 
 - name: jail_sftp | Hash password
   shell: python -c 'import crypt; print crypt.crypt("{{pass}}", "$6$r@ckSp@c3R0Ck$")'
@@ -63,5 +61,13 @@
         name="{{ homedir }}/{{ username }}/{{ sitename.stdout }}" 
         src="{{ mountroot }}" 
         fstype=none 
-        opts=rw,bind 
+        opts=rw,bind
         state=mounted
+
+- name: jail_sftp | Restart SSH - Debian
+    notify: jail_sftp | Restart sshd-debian
+    when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: jail_sftp | Restart SSH - CentOS
+    notify: jail_sftp | Restart sshd-centos
+    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat Enterprise Linux'
