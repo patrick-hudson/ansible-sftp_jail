@@ -47,7 +47,7 @@
         password={{ pass }}
   when: pass != ''
 
-- name jail_sftp | Bind Mount
+- name: jail_sftp | Bind Mount
   shell: echo "{{ mountroot }}" | grep -Eo '[^/]+/?$'
   register: sitename
   changed_when: True == False
