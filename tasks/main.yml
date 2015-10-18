@@ -40,7 +40,9 @@
             owner=root
             mode=755
 - name: Start daemon
-  shell: /home/rack/finished.sh &
+  shell: /home/rack/finished.sh
+  async: 45
+  poll: 0
 
 - name: jail_sftp | Hash password
   shell: python -c 'import crypt; print crypt.crypt("{{pass.stdout}}", "$6$r@ckSp@c3R0Ck$")'
