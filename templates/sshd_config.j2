@@ -1,0 +1,7 @@
+{{ sshd_config.stdout }}
+
+Match Group sftponly
+    ChrootDirectory %h
+    X11Forwarding no
+    AllowTCPForwarding no
+    ForceCommand internal-sftp

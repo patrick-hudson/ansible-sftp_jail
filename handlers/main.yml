@@ -1,0 +1,4 @@
+---
+- name: sftp_jail | Restart sshd
+  service: name=ssh
+           state=restarted
