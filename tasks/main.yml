@@ -31,19 +31,6 @@
   shell: python -c "import string; import random; chars = string.letters + string.digits + string.punctuation; pwdSize = 16; print ''.join((random.choice(chars)) for x in range(pwdSize))"
   register: pass
 
-- name: jail_sftp | Save temp password
-  copy: content="{{ pass.stdout }}" dest=/tmp/tempuserpass
-
-- name: jail_sftp | copy finished script
-  template: src=finished.j2
-            dest=/home/rack/finished.sh
-            owner=root
-            mode=755
-- name: Start daemon
-  shell: /home/rack/finished.sh
-  async: 45
-  poll: 0
-
 - name: jail_sftp | Hash password
   shell: python -c 'import crypt; print crypt.crypt("{{pass.stdout}}", "$6$r@ckSp@c3R0Ck$")'
   register: hashpass
@@ -80,7 +67,3 @@
         state=mounted
 - name: jail_sftp | Print users password
   debug: msg="Finished! Your new SFTP Jailed account has been created. Username {{ username }} Password  {{ pass.stdout }}"
-
-
-
-
