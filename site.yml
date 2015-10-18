@@ -2,6 +2,8 @@
 - name: test-playbook | Test sftp-server role
   hosts: all
   sudo: yes
+  vars_files:
+    - 'defaults/main.yml'
   tasks:
     - include: 'tasks/main.yml'
   handlers:
