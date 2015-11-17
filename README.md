@@ -77,3 +77,11 @@ PLAY RECAP ********************************************************************
 
 ### Pay mind to the last message. That's your users username and password.
 
+### Extra Fun!
+
+Wanna run this locally? Don't want to deal with inventory and other junk?
+
+```ansible-playbook --extra-vars "ansible_connection=ssh ansible_ssh_user=sshuser username=myaccount mountroot=/var/www/html" -k -i 'IP,' site.yml```
+
+Boom! Easy to run on remote servers!
+
