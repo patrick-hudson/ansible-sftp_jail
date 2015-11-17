@@ -28,7 +28,7 @@
   ignore_errors: yes
 
 - name: jail_sftp | Generate password
-  shell: python -c "import string; import random; chars = string.letters + string.digits + string.punctuation; pwdSize = 16; print ''.join((random.choice(chars)) for x in range(pwdSize))"
+  shell: python -c "import string; import random; chars = string.letters + string.digits; pwdSize = 16; print ''.join((random.choice(chars)) for x in range(pwdSize))"
   register: pass
 
 - name: jail_sftp | Hash password
